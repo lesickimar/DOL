@@ -38,7 +38,7 @@ public class Tooltip : MonoBehaviour
         if (followPointer)
             FollowPointer();
 
-        if (timer >= duration)
+        if (timer++ >= duration)
         {
             Destroy(this);
         }
