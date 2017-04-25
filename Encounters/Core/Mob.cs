@@ -23,6 +23,8 @@ public abstract class Mob
     protected MobTimerHandler timerHandler;
     public MOBCLASS mobClass = MOBCLASS.NORMAL;
 
+    public int ZmiennaTestowa = 69;
+
     public Timer[] myTimer = new Timer[10];
     public BossTalk myBossTalk;
     public GameObject progressBar;
