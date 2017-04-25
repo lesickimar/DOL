@@ -18,10 +18,10 @@ public class Tooltip : MonoBehaviour
 
     public bool followPointer;
     public int duration;
-    public int timer;
+    public int timer = 0;
     public string content;
 
-    public static GameObject Show(string _content, int _duration, Vector3 position, bool _followPointer)
+    public static Tooltip Show(string _content, int _duration, Vector3 position, bool _followPointer)
     {
         GameObject tipObject = Instantiate(Resources.Load("Tooltip")) as GameObject;
         Tooltip myTip = tipObject.GetComponent<Tooltip>();
@@ -30,14 +30,19 @@ public class Tooltip : MonoBehaviour
         tipObject.transform.position = position;
         myTip.followPointer = _followPointer;
 
-        return tipObject;
+        return myTip;
     }
 
     private void Update()
     {
         if (followPointer)
             FollowPointer();
+        else if (duration > 0)
+            HandleLifeTime();
+    }
 
+    private void HandleLifeTime()
+    {
         if (timer++ >= duration)
         {
             Destroy(this);
