@@ -60,7 +60,7 @@ public class scrTalentIcon : MonoBehaviour
     void Update()
     {
         RefreshIcon();
-        if (myTip != null)
+        /*if (myTip != null)
         {
             Vector3 mousepos = Input.mousePosition;
 
@@ -70,7 +70,7 @@ public class scrTalentIcon : MonoBehaviour
             mousepos.z = 0;
 
             myTip.transform.position = mousepos;
-        }
+        }*/
     }
 
 }

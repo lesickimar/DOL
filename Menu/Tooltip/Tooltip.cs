@@ -26,6 +26,7 @@ public class Tooltip : MonoBehaviour
     {
         GameObject tipObject = Instantiate(Resources.Load("Tooltip")) as GameObject;
         tipObject.transform.SetParent(GameObject.Find("Canvas").transform);
+        tipObject.transform.localScale = new Vector3(1, 1, 1);
         Tooltip myTip = tipObject.GetComponent<Tooltip>();
         myTip.content = _content;
         myTip.duration = _duration;
