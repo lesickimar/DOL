@@ -33,6 +33,7 @@ public class Tooltip : MonoBehaviour
         tipObject.transform.position = position;
         myTip.followPointer = _followPointer;
         myTip.contentDisplay = tipObject.transform.GetChild(0).GetComponent<Text>();
+        myTip.Refresh();
 
         return myTip;
     }
