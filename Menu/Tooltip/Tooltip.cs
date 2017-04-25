@@ -20,6 +20,7 @@ public class Tooltip : MonoBehaviour
     public int duration;
     public int timer = 0;
     public string content;
+    public Text contentDisplay;
 
     public static Tooltip Show(string _content, int _duration, Vector3 position, bool _followPointer)
     {
@@ -29,6 +30,7 @@ public class Tooltip : MonoBehaviour
         myTip.duration = _duration;
         tipObject.transform.position = position;
         myTip.followPointer = _followPointer;
+        myTip.contentDisplay = tipObject.transform.GetChild(0).GetComponent<Text>();
 
         return myTip;
     }
@@ -55,5 +57,16 @@ public class Tooltip : MonoBehaviour
         v3.z = 10f;
         v3 = Camera.main.ScreenToWorldPoint(v3);
         transform.position = Camera.main.ScreenToWorldPoint(v3);
+    }
+
+    public void UpdateContent(string _content)
+    {
+        content = _content;
+        Refresh();
+    }
+
+    public void Refresh()
+    {
+        contentDisplay.text = content;
     }
 }

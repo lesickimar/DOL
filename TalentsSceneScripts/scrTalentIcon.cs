@@ -6,7 +6,7 @@ public class scrTalentIcon : MonoBehaviour
 {
     public Talent myTalent;
 
-    GameObject myTip;
+    Tooltip myTip;
 
     Image myIcon;
 
@@ -48,13 +48,13 @@ public class scrTalentIcon : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        myTip = Tooltip.Create(myTalent.GetTalentString());
+        myTip = Tooltip.Show(myTalent.GetTalentString(), 0, new Vector3(0,0), true);
     }
 
     public void OnMouseExit()
     {
         if (myTip != null)
-        Destroy(myTip);
+        Destroy(myTip.gameObject);
     }
 
     void Update()

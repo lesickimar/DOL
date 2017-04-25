@@ -683,7 +683,7 @@ public class GameCore
     int actualEntry = 0;
     bool overhealingPenaltyDone = false;
     bool expTranferDone = false;
-    GameObject myTip = null;
+    Tooltip myTip = null;
     int endingTimer = 600;
     int[] conversionValue = new int[10];
     int conversionValue2 = 1;
@@ -692,14 +692,14 @@ public class GameCore
     {
         if (myTip == null)
         {
-            myTip = Tooltip.Create("");
+            myTip = Tooltip.Show("", 0, new Vector3(0,0,0), false);
             for (int i = 0; i < tempRecount.amount; i++)
             {
                 conversionValue[i] = Mathf.Max(8, Mathf.Min(tempRecount.entry[i].healing, tempRecount.entry[i].overhealing / 3) / 120);
             }
             ClearScene();
         }
-        myTip.transform.GetChild(0).GetComponent<Text>().text = tempRecount.GetRecount(true) + "\n\n Experience gained: " + tempExpGained + "\n\nLevel: " + chosenAccount.level + "\n" + chosenAccount.GetExpString() + chosenAccount.tempLevelUp;
+        myTip.UpdateContent(tempRecount.GetRecount(true) + "\n\n Experience gained: " + tempExpGained + "\n\nLevel: " + chosenAccount.level + "\n" + chosenAccount.GetExpString() + chosenAccount.tempLevelUp);
         if (!overhealingPenaltyDone) // zmniejszamy healing o nasz overhealing
         {
             int doneamount = 0;
