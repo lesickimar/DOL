@@ -25,6 +25,7 @@ public class Tooltip : MonoBehaviour
     public static Tooltip Show(string _content, int _duration, Vector3 position, bool _followPointer)
     {
         GameObject tipObject = Instantiate(Resources.Load("Tooltip")) as GameObject;
+        tipObject.transform.SetParent(GameObject.Find("Canvas").transform);
         Tooltip myTip = tipObject.GetComponent<Tooltip>();
         myTip.content = _content;
         myTip.duration = _duration;
