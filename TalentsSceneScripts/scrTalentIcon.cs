@@ -48,7 +48,7 @@ public class scrTalentIcon : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        myTip = Tooltip.Show(myTalent.GetTalentString(), 0, new Vector3(0,0), true);
+        myTip = Tooltip.Show(myTalent.GetTalentString(), 0, Tooltip.GetMousePosition(), false);
     }
 
     public void OnMouseExit()

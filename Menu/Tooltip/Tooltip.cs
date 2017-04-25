@@ -54,12 +54,17 @@ public class Tooltip : MonoBehaviour
         }
     }
 
-    private void FollowPointer()
+    public static Vector3 GetMousePosition()
     {
         Vector3 v3 = Input.mousePosition;
         v3.z = 10f;
         v3 = Camera.main.ScreenToWorldPoint(v3);
-        transform.position = v3;
+        return v3;
+    }
+
+    private void FollowPointer()
+    {
+        transform.position = Tooltip.GetMousePosition();
     }
 
     public void UpdateContent(string _content)
