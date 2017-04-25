@@ -58,7 +58,7 @@ public class Tooltip : MonoBehaviour
         Vector3 v3 = Input.mousePosition;
         v3.z = 10f;
         v3 = Camera.main.ScreenToWorldPoint(v3);
-        transform.position = Camera.main.ScreenToWorldPoint(v3);
+        transform.position = v3;
     }
 
     public void UpdateContent(string _content)

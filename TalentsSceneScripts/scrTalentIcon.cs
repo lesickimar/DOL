@@ -53,8 +53,8 @@ public class scrTalentIcon : MonoBehaviour
 
     public void OnMouseExit()
     {
-        //if (myTip != null)
-        //Destroy(myTip.gameObject);
+        if (myTip != null)
+        Destroy(myTip.gameObject);
     }
 
     void Update()
