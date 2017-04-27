@@ -4,6 +4,7 @@ using System.Collections;
 public class DebuffScript : MonoBehaviour {
 	
 	public GameObject myParent;
+    public Debuff parentDebuff;
 	public int myid;
 
     // animacja
@@ -34,5 +35,19 @@ public class DebuffScript : MonoBehaviour {
     {
         timer = 30;
         scale = 1f;
+    }
+
+    public void SetParent(Debuff _parent)
+    {
+        parentDebuff = _parent;
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            Debug.Log("click");
+            parentDebuff.Dispel();
+        }
     }
 }

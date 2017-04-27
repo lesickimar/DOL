@@ -80,10 +80,17 @@ public class GameCore
     public bool isTSR = true; // three seconds rule
     public GameObject mySpellIcon;
     private int TSRtimer = 0;
+
     public bool isInteruptOnCD = false;
     private int interuptCD = 480;
     private GameObject interuptIcon;
     private GameObject interuptText;
+
+    public bool isDispelOnCD = false;
+    private int DispelCD = 480;
+    private GameObject DispelIcon;
+    private GameObject DispelText;
+
     public CombatItem[] combatItem = new CombatItem[3];
     public Image[] combatItemIcon = new Image[3];
 
@@ -101,6 +108,10 @@ public class GameCore
         }
         interuptIcon = GameObject.Find("InteruptSpellMask");
         interuptText = GameObject.Find("InteruptCDText");
+
+        DispelIcon = GameObject.Find("DispelMask");
+        DispelText = GameObject.Find("DispelCDText");
+
         RefreshPickedSpellFrame();
     }
 
@@ -818,6 +829,30 @@ public class GameCore
         }
     }
 
+    private void DispelUpdate()
+    {
+        if (isDispelOnCD)
+        {
+            DispelCD--;
+            if (DispelCD <= 0)
+            {
+                DispelCD = 480;
+                isDispelOnCD = false;
+            }
+        }
+
+        if (isDispelOnCD)
+        {
+            DispelIcon.transform.GetChild(1).GetComponent<Image>().fillAmount = (float)DispelCD / 480f;
+            DispelText.GetComponent<Text>().text = (DispelCD / 60).ToString();
+        }
+        else
+        {
+            DispelIcon.transform.GetChild(1).GetComponent<Image>().fillAmount = 0;
+            DispelText.GetComponent<Text>().text = "";
+        }
+    }
+
     public void Update()
     {
         if (!ScenesController.SControl.isLocked)
@@ -826,6 +861,7 @@ public class GameCore
                 PlayerSpell[i].Update();
 
             InteruptUpdate();
+            DispelUpdate();
 
             PC_Picking();
 

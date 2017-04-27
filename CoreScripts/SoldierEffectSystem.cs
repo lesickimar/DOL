@@ -27,7 +27,7 @@ public class SoldierEffectSystem
         {
             Buffs[BuffsAmount] = new Buff(bufftype, buffdur, soldier, _caster, spellInfo, _gap, minv, maxv);
             Buffs[BuffsAmount].icon = Object.Instantiate(Resources.Load("BuffIcon"), soldier.frame.transform.position + new Vector3(1.5f, -0.6f, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-            Buffs[BuffsAmount].icon.GetComponent<Image>().sprite = GetBuffResource(bufftype);
+            Buffs[BuffsAmount].SetIcon(GetBuffResource(bufftype));
             Buffs[BuffsAmount].icon.transform.SetParent(GameObject.Find("Canvas").transform);
             Buffs[BuffsAmount].icon.transform.localScale = new Vector3(1, 1, 1);
 
@@ -51,7 +51,6 @@ public class SoldierEffectSystem
     {
         switch (_buff)
         {
-            /*
             case 0: return Resources.Load<Sprite>("BuffsIcons/");
             case (int)Buff.DB.WORD_OF_KINGS_FAITH: return Resources.Load<Sprite>("BuffsIcons/WordOfKingsFaith");
             case (int)Buff.DB.WORD_OF_KINGS_LOYALTY: return Resources.Load<Sprite>("BuffsIcons/WordOfKingsLoyalty");
@@ -60,7 +59,6 @@ public class SoldierEffectSystem
             case (int)Buff.DB.FLASH_OF_FUTURE: return Resources.Load<Sprite>("BuffsIcons/FlashofFuture");
             case (int)Buff.DB.SOOTHING_VOID: return Resources.Load<Sprite>("BuffsIcons/SoothingVoid");
             case (int)Buff.DB.TWILIGHT_BEAM: return Resources.Load<Sprite>("BuffsIcons/TwilightBeam");
-            */
             default: return Resources.Load<Sprite>("effect");
         }
     }
@@ -71,16 +69,16 @@ public class SoldierEffectSystem
         {
             if (Buffs[i].icon != null)
             {
-                float basex = 0f;
-                Buffs[i].icon.transform.position = soldier.frame.transform.position + new Vector3(basex + 0.25f * i, 0.4f, -0.5f);
+                float basex = -0.45f;
+                Buffs[i].icon.transform.position = soldier.frame.transform.position + new Vector3(basex, 0.4f - 0.3f * i, -0.5f);
             }
         }
         for (int i = 0; i < DebuffsAmount; i++)
         {
             if (Debuffs[i].icon != null)
             {
-                float basex = 0f;
-                Debuffs[i].icon.transform.position = soldier.frame.transform.position + new Vector3(basex + 0.25f * i, -0.1f, -0.5f);
+                float basex = 0.45f;
+                Debuffs[i].icon.transform.position = soldier.frame.transform.position + new Vector3(basex, -0.1f - 0.3f * i, -0.5f);
             }
         }
     }
@@ -176,7 +174,8 @@ public class SoldierEffectSystem
             Debuffs[DebuffsAmount].icon.transform.localScale = new Vector3(1, 1, 1);
             Debuffs[DebuffsAmount].icon.GetComponent<DebuffScript>().myParent = soldier.frame;
             Debuffs[DebuffsAmount].icon.GetComponent<DebuffScript>().myid = DebuffsAmount;
-            Debuffs[DebuffsAmount].icon.GetComponent<Image>().sprite = GetDebuffIcon(_myDebuff.ID);
+            Debuffs[DebuffsAmount].SetIcon(GetDebuffIcon(_myDebuff.ID));
+            Debuffs[DebuffsAmount].icon.GetComponent<DebuffScript>().SetParent(Debuffs[DebuffsAmount]);
 
             DebuffsAmount++;
         }
@@ -196,7 +195,6 @@ public class SoldierEffectSystem
     {
         switch (_debuff)
         {
-            /*
             case 0: return Resources.Load<Sprite>("");
             case DEBUFF.RAIN_OF_FIRE: return Resources.Load<Sprite>("EnemySpells/Tantrum");
             case DEBUFF.CONSUMING_DARKNESS: return Resources.Load<Sprite>("EnemySpells/Tantrum");
@@ -209,7 +207,6 @@ public class SoldierEffectSystem
             case DEBUFF.MIND_BOMB: return Resources.Load<Sprite>("EnemySpells/MindBomb");
             case DEBUFF.VOIDFLAME: return Resources.Load<Sprite>("EnemySpells/Voidflame");
             case DEBUFF.DARK_ROSE: return Resources.Load<Sprite>("EnemySpells/DarkRose");
-            */
             default: return Resources.Load<Sprite>("effect");
         }
     }
@@ -288,6 +285,7 @@ public class SoldierEffectSystem
 
     //******************************************** KONIEC DEBUFFY ******************************************** \\
 
+        /*
     private Debuff GetDebuffByID(DEBUFF _id)
     {
         switch (_id)
@@ -303,7 +301,7 @@ public class SoldierEffectSystem
             case DEBUFF.DARK_ROSE: return new DarkRose(soldier);
             default: return null;
         }
-    }
+    }*/
 
     public void Clear()
     {

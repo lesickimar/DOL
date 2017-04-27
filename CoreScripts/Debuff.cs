@@ -41,11 +41,16 @@ public class Debuff
 		}
         RefreshAction();
         if (multiplier > 1f)
-            icon.transform.GetChild(0).GetComponent<Text>().text = ((int)multiplier).ToString();
+            icon.transform.GetChild(2).GetComponent<Text>().text = ((int)multiplier).ToString();
         else
-            icon.transform.GetChild(0).GetComponent<Text>().text = "";        
+            icon.transform.GetChild(2).GetComponent<Text>().text = "";        
         
 	}
+
+    public void SetIcon(Sprite _icon)
+    {
+        icon.transform.GetChild(0).GetComponent<Image>().sprite = _icon;
+    }
 
     public virtual void RefreshAction()
     {
@@ -55,6 +60,15 @@ public class Debuff
     public virtual void Execute()
     {
         
+    }
+
+    public void Dispel()
+    {
+        if (!GameCore.Core.isDispelOnCD)
+        {
+            GameCore.Core.isDispelOnCD = true;
+            Remove();
+        }
     }
 	
 	public void Update()
@@ -68,7 +82,7 @@ public class Debuff
             duration = Mathf.Max(0, --duration);
             if (icon != null)
             {
-                icon.transform.GetChild(1).GetComponent<Image>().fillAmount = (float)duration / (float)maxDuration;
+                icon.transform.GetChild(3).GetComponent<Image>().fillAmount = 1f - (float)duration / (float)maxDuration;
             }
             if (duration % gap == 0)
                 Execute();

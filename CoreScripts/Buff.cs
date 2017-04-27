@@ -60,6 +60,11 @@ public class Buff
         }
     }
 
+    public void SetIcon(Sprite _icon)
+    {
+        icon.transform.GetChild(0).GetComponent<Image>().sprite = _icon;
+    }
+
     public void Remove()
     {
         if (ID == (int)DB.SOOTHING_VOID)
@@ -102,7 +107,7 @@ public class Buff
             duration = Mathf.Max(0, --duration);
             if (icon != null)
             {
-                icon.transform.GetChild(0).GetComponent<Image>().fillAmount = (float)duration / (float)maxDuration;
+                icon.transform.GetChild(3).GetComponent<Image>().fillAmount = (float)duration / (float)maxDuration;
             }
             //if (icon != null)
             //icon.GetComponent<Image>().color = new Color(1, 1, 1, Mathf.Max(duration / 180f, duration / maxDuration));
